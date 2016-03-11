@@ -2,26 +2,22 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentListener;
 import java.util.Scanner;
 
 
-
-public class CardReaderClient extends JFrame {
-	
-	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
-	private JLabel ipAddressLbl, ipAddressDisplay, portLbl, portDisplay, roomIDLbl, roomIDDisplay; 
+public class GUI extends JFrame {
+	private JLabel startTime, endTime, currentTime, sessionCode, sessionName;
 	private JTextField input;
-	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
+	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel;
 	private JButton clearButton, submitButton;
 	private JMenuBar menu;
-	private JMenu fileMenu, settingsMenu;
+	private JMenu fileMenu;
 	private JMenuItem exitItem;
 	
 
-	public CardReaderClient() {
+	public void CardReaderClient() {
 	      setTitle("Card Reader");
 	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,18 +29,14 @@ public class CardReaderClient extends JFrame {
 	      menu = new JMenuBar();
 	      fileMenu = new JMenu("File");
 	      fileMenu.setMnemonic(KeyEvent.VK_F);
-	      settingsMenu = new JMenu("Settings");
-	      settingsMenu.setMnemonic(KeyEvent.VK_S);
 	      
 	      exitItem = new JMenuItem("Exit");
 	      exitItem.setMnemonic(KeyEvent.VK_X);
 	      
-	      settingsMenu.addActionListener(new actionListener());
 	      exitItem.addActionListener(new actionListener());
 	      
 	      fileMenu.add(exitItem);
 	      menu.add(fileMenu);
-	      menu.add(settingsMenu);
 	      setJMenuBar(menu);
 	      
 	      
@@ -89,34 +81,28 @@ public class CardReaderClient extends JFrame {
 		
 		southDisplayPanel = new JPanel();
 		southDisplayPanel.setBackground(Color.CYAN);
-	    southDisplayPanel.setLayout(new GridLayout(2,5)); 
-	    southDisplayPanel.setBorder(new EmptyBorder(50,50,50,50));
+	    southDisplayPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 60 )); 
 		
-	    startTimeLbl = new JLabel("Start Time");
-	    startTimeDisplay = new JLabel("11:00");
-        endTimeLbl = new JLabel("End Time");
-        endTimeDisplay = new JLabel("13:00");
-        currentTimeLbl = new JLabel("Current Time");
-        currentTimeDisplay = new JLabel("12:40");
-        sessionCodeLbl = new JLabel("Session Code");
-        sessionCodeDisplay = new JLabel("CSY2027");
-        sessionNameLbl = new JLabel("Session Name");
-        sessionNameDisplay = new JLabel("Group Project");
+	    startTime = new JLabel("Start Time");
+        endTime = new JLabel("End Time");
+        currentTime = new JLabel("Current Time");
+        sessionCode = new JLabel("Session Code");
+        sessionName = new JLabel("Session Name");
         
+        /*
+        Font font = new Font("Consolas", Font.BOLD, 12);
+        startTime.setFont(font);
+        endTime.setFont(font);
+        currentTime.setFont(font);
+        sessionCode.setFont(font);
+        sessionName.setFont(font); 
+        */
 	      
-	    
-	    southDisplayPanel.add(sessionCodeLbl);
-	    southDisplayPanel.add(sessionNameLbl);
-	    southDisplayPanel.add(currentTimeLbl);
-	    southDisplayPanel.add(startTimeLbl);
-	    southDisplayPanel.add(endTimeLbl);
-	    southDisplayPanel.add(sessionCodeDisplay);
-	    southDisplayPanel.add(sessionNameDisplay);
-	    southDisplayPanel.add(currentTimeDisplay);
-	    southDisplayPanel.add(startTimeDisplay);
-	    southDisplayPanel.add(endTimeDisplay);
-	    		
-	    	
+	    southDisplayPanel.add(startTime);
+	    southDisplayPanel.add(endTime);
+	    southDisplayPanel.add(currentTime);
+	    southDisplayPanel.add(sessionCode);
+	    southDisplayPanel.add(sessionName);
 	    
 	      
 	}
@@ -153,42 +139,28 @@ public class CardReaderClient extends JFrame {
 			if (src == submitButton){		
 				input.setText("ID SUBMITTED!");
 			}
-			if (src == settingsMenu){
-				settingsGUI();
-			}
 		}
 	} 
 	
 	 
-	private void settingsGUI(){
-		  setTitle("Settings");
-	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      
-	      settingsPanel = new JPanel();
-	      settingsPanel.setLayout(new GridLayout(3,2));
-	      
-	      ipAddressLbl = new JLabel("IP Address: ");
-	      ipAddressDisplay = new JLabel("127.0.0.1");
-	      portLbl = new JLabel("Port Number: ");
-	      portDisplay = new JLabel("3001");
-	      roomIDLbl = new JLabel("Room ID: ");
-	      roomIDDisplay = new JLabel("MB8");
-	      
-	      settingsPanel.add(ipAddressLbl);
-	      settingsPanel.add(ipAddressDisplay);
-	      settingsPanel.add(portLbl);
-	      settingsPanel.add(portDisplay);
-	      settingsPanel.add(roomIDLbl);
-	      settingsPanel.add(roomIDDisplay);
-	      
-	      pack();
-	      
-	      setVisible(true);
-	      setResizable(false); 
-	}
-		
-	public static void main(String[] args) {
-		CardReaderClient CardReader = new CardReaderClient();
-	}
-}
+	 /*
+	 public static class GhostText implements FocusListener, DocumentListener, PropertyChangeListener {
+	        private final JTextField textfield;
+	        private boolean isEmpty;
+	        private Color ghostColor;
+	        private Color foregroundColor;
+	        private final String ghostText;
 
+	        protected GhostText(final JTextField textfield, String ghostText) {
+	            super();
+	            this.textfield = textfield;
+	            this.ghostText = ghostText;
+	            this.ghostColor = Color.LIGHT_GRAY;
+	            textfield.addFocusListener(this);
+	            registerListeners();
+	            updateState();
+	            if (!this.textfield.hasFocus()) {
+	                focusLost(null);
+	            }
+	        } */
+}
