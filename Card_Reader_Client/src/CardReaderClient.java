@@ -17,8 +17,8 @@ public class CardReaderClient extends JFrame {
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
 	private JButton clearButton, submitButton;
 	private JMenuBar menu;
-	private JMenu fileMenu, settingsMenu;
-	private JMenuItem exitItem;
+	private JMenu fileMenu, optionsMenu;
+	private JMenuItem exitItem, settingsItem;
 	
 
 	public CardReaderClient() {
@@ -33,18 +33,22 @@ public class CardReaderClient extends JFrame {
 	      menu = new JMenuBar();
 	      fileMenu = new JMenu("File");
 	      fileMenu.setMnemonic(KeyEvent.VK_F);
-	      settingsMenu = new JMenu("Settings");
-	      settingsMenu.setMnemonic(KeyEvent.VK_S);
+	      optionsMenu = new JMenu("Settings");
+	      optionsMenu.setMnemonic(KeyEvent.VK_S);
 	      
 	      exitItem = new JMenuItem("Exit");
 	      exitItem.setMnemonic(KeyEvent.VK_X);
+	      settingsItem = new JMenuItem("Settings");
+	      settingsItem.setMnemonic(KeyEvent.VK_S);
 	      
-	      settingsMenu.addActionListener(new actionListener());
+	      
+	      settingsItem.addActionListener(new actionListener());
 	      exitItem.addActionListener(new actionListener());
 	      
 	      fileMenu.add(exitItem);
+	      optionsMenu.add(settingsItem);
 	      menu.add(fileMenu);
-	      menu.add(settingsMenu);
+	      menu.add(optionsMenu);
 	      setJMenuBar(menu);
 	      
 	      
@@ -153,42 +157,50 @@ public class CardReaderClient extends JFrame {
 			if (src == submitButton){		
 				input.setText("ID SUBMITTED!");
 			}
-			if (src == settingsMenu){
-				settingsGUI();
+			if (src == settingsItem){
+				new settings();
 			}
 		}
 	} 
 	
-	 
-	private void settingsGUI(){
-		  setTitle("Settings");
-	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      
-	      settingsPanel = new JPanel();
-	      settingsPanel.setLayout(new GridLayout(3,2));
-	      
-	      ipAddressLbl = new JLabel("IP Address: ");
-	      ipAddressDisplay = new JLabel("127.0.0.1");
-	      portLbl = new JLabel("Port Number: ");
-	      portDisplay = new JLabel("3001");
-	      roomIDLbl = new JLabel("Room ID: ");
-	      roomIDDisplay = new JLabel("MB8");
-	      
-	      settingsPanel.add(ipAddressLbl);
-	      settingsPanel.add(ipAddressDisplay);
-	      settingsPanel.add(portLbl);
-	      settingsPanel.add(portDisplay);
-	      settingsPanel.add(roomIDLbl);
-	      settingsPanel.add(roomIDDisplay);
-	      
-	      pack();
-	      
-	      setVisible(true);
-	      setResizable(false); 
-	}
+	 public class settings extends JFrame {
+		 
+		 public settings(){
+			  
+			  setTitle("Settings");
+		      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		      
+		      
+		      
+		      settingsPanel = new JPanel();
+		      settingsPanel.setLayout(new GridLayout(3,2));
+		      
+		      ipAddressLbl = new JLabel("IP Address: ");
+		      ipAddressDisplay = new JLabel("127.0.0.1");
+		      portLbl = new JLabel("Port Number: ");
+		      portDisplay = new JLabel("3001");
+		      roomIDLbl = new JLabel("Room ID: ");
+		      roomIDDisplay = new JLabel("MB8");
+		      
+		      settingsPanel.add(ipAddressLbl);
+		      settingsPanel.add(ipAddressDisplay);
+		      settingsPanel.add(portLbl);
+		      settingsPanel.add(portDisplay);
+		      settingsPanel.add(roomIDLbl);
+		      settingsPanel.add(roomIDDisplay);
+		      
+		      add(settingsPanel);
+		      
+		      pack();
+		      
+		      setVisible(true);
+		      setResizable(false); 
+		 }
+	 }
 		
 	public static void main(String[] args) {
 		CardReaderClient CardReader = new CardReaderClient();
+		/* JOptionPane.showMessageDialog(null, "My Goodness, this is so concise"); */
 	}
 }
 
