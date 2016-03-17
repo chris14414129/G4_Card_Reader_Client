@@ -126,17 +126,20 @@ public class CardReaderClient extends JFrame {
 		
 		southDisplayPanel = new JPanel();
 		southDisplayPanel.setBackground(Color.CYAN);
-	    southDisplayPanel.setLayout(new GridLayout(2,5)); 
+	    southDisplayPanel.setLayout(new GridLayout(2, 5, 10, 10)); 
 	    southDisplayPanel.setBorder(new EmptyBorder(50,50,50,50));
 		
 	    startTimeLbl = new JLabel("Start Time");
+	    startTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
 	    startTimeDisplay = new JLabel("11:00");
+	    startTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         endTimeLbl = new JLabel("End Time");
         endTimeDisplay = new JLabel("13:00");
         currentTimeLbl = new JLabel("Current Time");
         currentTimeDisplay = new JLabel("12:40");
         sessionCodeLbl = new JLabel("Session Code");
         sessionCodeDisplay = new JLabel("CSY2027");
+        sessionCodeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         sessionNameLbl = new JLabel("Session Name");
         sessionNameDisplay = new JLabel("Group Project");
         
@@ -144,12 +147,12 @@ public class CardReaderClient extends JFrame {
 	    
 	    southDisplayPanel.add(sessionCodeLbl);
 	    southDisplayPanel.add(sessionNameLbl);
-	    southDisplayPanel.add(currentTimeLbl);
+	    /*southDisplayPanel.add(currentTimeLbl);*/
 	    southDisplayPanel.add(startTimeLbl);
 	    southDisplayPanel.add(endTimeLbl);
 	    southDisplayPanel.add(sessionCodeDisplay);
 	    southDisplayPanel.add(sessionNameDisplay);
-	    southDisplayPanel.add(currentTimeDisplay);
+	    /*southDisplayPanel.add(currentTimeDisplay);*/
 	    southDisplayPanel.add(startTimeDisplay);
 	    southDisplayPanel.add(endTimeDisplay);
 	    		
