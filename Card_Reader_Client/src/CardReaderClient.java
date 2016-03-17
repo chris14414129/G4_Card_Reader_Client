@@ -134,14 +134,21 @@ public class CardReaderClient extends JFrame {
 	    startTimeDisplay = new JLabel("11:00");
 	    startTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         endTimeLbl = new JLabel("End Time");
+        endTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
         endTimeDisplay = new JLabel("13:00");
+        endTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         currentTimeLbl = new JLabel("Current Time");
+        currentTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
         currentTimeDisplay = new JLabel("12:40");
+        currentTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         sessionCodeLbl = new JLabel("Session Code");
+        sessionCodeLbl.setHorizontalAlignment(SwingConstants.CENTER);
         sessionCodeDisplay = new JLabel("CSY2027");
         sessionCodeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         sessionNameLbl = new JLabel("Session Name");
+        sessionNameLbl.setHorizontalAlignment(SwingConstants.CENTER);
         sessionNameDisplay = new JLabel("Group Project");
+        sessionNameDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         
 	      
 	    
