@@ -1,10 +1,14 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentListener;
+
+import java.util.Calendar;
 import java.util.Scanner;
 
 /* Commands for communication
@@ -114,12 +118,30 @@ public class CardReaderClient extends JFrame {
 		input = new JTextField("Enter Student ID Here");
 		input.setHorizontalAlignment(JTextField.CENTER);
 		
+        currentTimeLbl = new JLabel("Current Time");
+        currentTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
+        currentTimeDisplay = new JLabel();
+        currentTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		Font font = new Font("Consolas", Font.BOLD, 20);
 		input.setFont(font);
 		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		int interval = 1000;
+	    
+	    new Timer(interval, new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            Calendar now = Calendar.getInstance();
+	            currentTimeDisplay.setText(dateFormat.format(now.getTime()));
+	        }
+	    }).start();
+		
 		northDisplayPanel = new JPanel();
-		northDisplayPanel.setLayout(new BorderLayout());
-		northDisplayPanel.add(input, BorderLayout.CENTER);
+		northDisplayPanel.setLayout(new GridLayout(3,1));
+		northDisplayPanel.add(input);
+		northDisplayPanel.add(currentTimeLbl);
+		northDisplayPanel.add(currentTimeDisplay);
 	}
 	
 	private void buildSouthDisplayPanel(){
@@ -137,10 +159,6 @@ public class CardReaderClient extends JFrame {
         endTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
         endTimeDisplay = new JLabel("13:00");
         endTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
-        currentTimeLbl = new JLabel("Current Time");
-        currentTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        currentTimeDisplay = new JLabel("12:40");
-        currentTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         sessionCodeLbl = new JLabel("Session Code");
         sessionCodeLbl.setHorizontalAlignment(SwingConstants.CENTER);
         sessionCodeDisplay = new JLabel("CSY2027");
@@ -154,12 +172,10 @@ public class CardReaderClient extends JFrame {
 	    
 	    southDisplayPanel.add(sessionCodeLbl);
 	    southDisplayPanel.add(sessionNameLbl);
-	    /*southDisplayPanel.add(currentTimeLbl);*/
 	    southDisplayPanel.add(startTimeLbl);
 	    southDisplayPanel.add(endTimeLbl);
 	    southDisplayPanel.add(sessionCodeDisplay);
 	    southDisplayPanel.add(sessionNameDisplay);
-	    /*southDisplayPanel.add(currentTimeDisplay);*/
 	    southDisplayPanel.add(startTimeDisplay);
 	    southDisplayPanel.add(endTimeDisplay);
 	    		
