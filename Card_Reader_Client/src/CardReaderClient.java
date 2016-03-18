@@ -49,14 +49,15 @@ import java.util.Scanner;
 public class CardReaderClient extends JFrame {
 	
 	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
-	private JLabel ipAddressLbl, ipAddressDisplay, portLbl, portDisplay, roomIDLbl, roomIDDisplay, imageLbl; 
-	private JTextField input;
+	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl; 
+	private JTextField input, ipAddressField, portNoField, roomIDField;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
-	private JButton clearButton, submitButton;
+	private JButton clearBtn, submitBtn, settingsClearBtn, settingsSubmitBtn;
 	private JMenuBar menu;
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
 	private ImageIcon infoImage;
+	private String ipAddress = "", portNo = "", roomID = "";
 	
 	
 
@@ -120,13 +121,16 @@ public class CardReaderClient extends JFrame {
 		input = new JTextField("Enter Student ID Here");
 		input.setHorizontalAlignment(JTextField.CENTER);
 		
+		Font font = new Font("Consolas", Font.BOLD, 20);
+		input.setFont(font);
+		
         currentTimeLbl = new JLabel("Current Time");
         currentTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
         currentTimeDisplay = new JLabel();
         currentTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
+        currentTimeDisplay.setFont(font);
 		
-		Font font = new Font("Consolas", Font.BOLD, 20);
-		input.setFont(font);
+		
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		int interval = 1000;
@@ -211,14 +215,16 @@ public class CardReaderClient extends JFrame {
 	      buttonPanel.setPreferredSize(new Dimension(500, 45));
 	      buttonPanel.setBorder(new LineBorder(Color.GRAY, 5));
 	      
-	      clearButton = new JButton("CLEAR");
-	      submitButton = new JButton("SUBMIT");
+	      submitBtn = new JButton("SUBMIT");
+	      clearBtn = new JButton("CLEAR");
 	      
-	      clearButton.addActionListener(new actionListener());
-	      submitButton.addActionListener(new actionListener());
+	      submitBtn.addActionListener(new actionListener());
+	      clearBtn.addActionListener(new actionListener());
 	      
-	      buttonPanel.add(clearButton, BorderLayout.EAST);
-	      buttonPanel.add(submitButton, BorderLayout.WEST);
+	      buttonPanel.add(submitBtn, BorderLayout.WEST);
+	      buttonPanel.add(clearBtn, BorderLayout.EAST);
+	      
+	      checkSettingInputs();
 	      
 	      
 	}
@@ -230,14 +236,26 @@ public class CardReaderClient extends JFrame {
 			if (src == exitItem){
 				System.exit(0);
 			}
-			if (src == clearButton){
+			if (src == clearBtn){
 				input.setText("");
 			}
-			if (src == submitButton){		
+			if (src == submitBtn){		
 				input.setText("ID SUBMITTED!");
 			}
 			if (src == settingsItem){
 				new settings();
+			}
+			if (src == settingsClearBtn){
+				ipAddress = "";
+				portNo = "";
+				roomID = "";
+				checkSettingInputs();
+			}
+			if (src == settingsSubmitBtn){
+				ipAddress = ipAddressField.getText();
+				portNo = portNoField.getText();
+				roomID = roomIDField.getText();
+				checkSettingInputs();
 			}
 		}
 	} 
@@ -252,23 +270,36 @@ public class CardReaderClient extends JFrame {
 		      
 		      
 		      settingsPanel = new JPanel();
-		      settingsPanel.setLayout(new GridLayout(3,2));
+		      settingsPanel.setLayout(new GridLayout(4,2));
+		      
 		      
 		      ipAddressLbl = new JLabel("IP Address: ");
-		      ipAddressDisplay = new JLabel("127.0.0.1");
+		      ipAddressField = new JTextField(ipAddress);
+		      ipAddressField.setEditable(true);
 		      portLbl = new JLabel("Port Number: ");
-		      portDisplay = new JLabel("3001");
+		      portNoField = new JTextField(portNo);
+		      portNoField.setEditable(true);
 		      roomIDLbl = new JLabel("Room ID: ");
-		      roomIDDisplay = new JLabel("MB8");
+		      roomIDField = new JTextField(roomID);
+		      roomIDField.setEditable(true);
+		      
+		      settingsSubmitBtn = new JButton("Submit");
+		      settingsClearBtn = new JButton("Clear");
+		      
+		      settingsSubmitBtn.addActionListener(new actionListener());
+		      settingsClearBtn.addActionListener(new actionListener());
 		      
 		      settingsPanel.add(ipAddressLbl);
-		      settingsPanel.add(ipAddressDisplay);
+		      settingsPanel.add(ipAddressField);
 		      settingsPanel.add(portLbl);
-		      settingsPanel.add(portDisplay);
+		      settingsPanel.add(portNoField);
 		      settingsPanel.add(roomIDLbl);
-		      settingsPanel.add(roomIDDisplay);
+		      settingsPanel.add(roomIDField);
+		      settingsPanel.add(settingsSubmitBtn);
+		      settingsPanel.add(settingsClearBtn);
 		      
 		      add(settingsPanel);
+		      
 		      
 		      pack();
 		      
@@ -276,6 +307,19 @@ public class CardReaderClient extends JFrame {
 		      setResizable(false); 
 		 }
 	 }
+	 
+	 public void checkSettingInputs(){
+		 
+	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("")){
+	    	  clearBtn.setEnabled(false);
+	    	  submitBtn.setEnabled(false);
+	      }
+	      else {
+	    	  clearBtn.setEnabled(true);
+	    	  submitBtn.setEnabled(true);
+	      }
+	 }
+	 
 		
 	public static void main(String[] args) {
 		CardReaderClient CardReader = new CardReaderClient();
