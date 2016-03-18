@@ -99,6 +99,8 @@ public class CardReaderClient extends JFrame {
 	      
 	      setVisible(true);
 	      setResizable(false); 
+	      
+	      setLocationRelativeTo( null );
 	}
 	
 	private void buildDisplayPanel(){
@@ -203,7 +205,7 @@ public class CardReaderClient extends JFrame {
 	    southDisplayPanel.add(startTimeDisplay);
 	    southDisplayPanel.add(endTimeDisplay);
 	    		
-	    	
+	    setLocationRelativeTo(null);
 	    
 	      
 	}
@@ -246,8 +248,11 @@ public class CardReaderClient extends JFrame {
 				new settings();
 			}
 			if (src == settingsClearBtn){
+				ipAddressField.setText("");
 				ipAddress = "";
+				portNoField.setText("");
 				portNo = "";
+				roomIDField.setText("");
 				roomID = "";
 				checkSettingInputs();
 			}
@@ -300,11 +305,14 @@ public class CardReaderClient extends JFrame {
 		      
 		      add(settingsPanel);
 		      
+		      setLocationRelativeTo(null);
 		      
 		      pack();
 		      
 		      setVisible(true);
 		      setResizable(false); 
+		      
+		      setLocationRelativeTo( null );
 		 }
 	 }
 	 
@@ -319,6 +327,7 @@ public class CardReaderClient extends JFrame {
 	    	  submitBtn.setEnabled(true);
 	      }
 	 }
+	 
 	 
 		
 	public static void main(String[] args) {
