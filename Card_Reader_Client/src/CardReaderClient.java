@@ -58,6 +58,7 @@ public class CardReaderClient extends JFrame {
 	private JMenuItem exitItem, settingsItem;
 	private ImageIcon infoImage;
 	
+	
 
 	public CardReaderClient() {
 	      setTitle("Card Reader");
@@ -139,23 +140,28 @@ public class CardReaderClient extends JFrame {
 	    }).start();
 		
 	    
-
-	      try {
-	      infoImage = new ImageIcon(this.getClass().getResource("images/Tick.png"));
-	      imageLbl = new JLabel(infoImage, JLabel.CENTER);
-	      }
-	      catch (Exception e)
-	      {
-	    	  JOptionPane.showMessageDialog(null, "Image not available");
-	      }
-	    
-	    
-	    
-		northDisplayPanel = new JPanel();
+	    northDisplayPanel = new JPanel();
+	    northDisplayPanel.setBackground(Color.CYAN);
 		northDisplayPanel.setLayout(new GridLayout(4,1));
 		northDisplayPanel.add(input);
 		northDisplayPanel.add(currentTimeLbl);
 		northDisplayPanel.add(currentTimeDisplay);
+		
+//GENERATING IMAGE CODE
+	      try {
+	      infoImage = new ImageIcon("images/Tick.png");
+	      imageLbl = new JLabel(infoImage, JLabel.CENTER);
+	      }
+	      catch (Exception e)
+	      {
+	    	  JOptionPane.showMessageDialog(null, "Error. Could not load image!");
+	      }
+	    
+	    northDisplayPanel.add(imageLbl);
+	    
+	    
+		
+		
 	}
 	
 	private void buildSouthDisplayPanel(){
