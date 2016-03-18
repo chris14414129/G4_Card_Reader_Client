@@ -49,7 +49,7 @@ import java.util.Scanner;
 public class CardReaderClient extends JFrame {
 	
 	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
-	private JLabel ipAddressLbl, ipAddressDisplay, portLbl, portDisplay, roomIDLbl, roomIDDisplay; 
+	private JLabel ipAddressLbl, ipAddressDisplay, portLbl, portDisplay, roomIDLbl, roomIDDisplay, picLabel; 
 	private JTextField input;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
 	private JButton clearButton, submitButton;
@@ -137,11 +137,15 @@ public class CardReaderClient extends JFrame {
 	        }
 	    }).start();
 		
+	    BufferedImage myPicture = ImageIO.read(new File("path-to-file")); //http://www.softicons.com/toolbar-icons/build-icons-by-design-kindle [REFERENCE THIS]
+	    picLabel = new JLabel(new ImageIcon(myPicture));
+	    
 		northDisplayPanel = new JPanel();
-		northDisplayPanel.setLayout(new GridLayout(3,1));
+		northDisplayPanel.setLayout(new GridLayout(4,1));
 		northDisplayPanel.add(input);
 		northDisplayPanel.add(currentTimeLbl);
 		northDisplayPanel.add(currentTimeDisplay);
+		northDisplayPanel.add(picLabel);
 	}
 	
 	private void buildSouthDisplayPanel(){
