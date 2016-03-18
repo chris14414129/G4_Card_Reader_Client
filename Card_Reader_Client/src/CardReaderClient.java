@@ -49,13 +49,14 @@ import java.util.Scanner;
 public class CardReaderClient extends JFrame {
 	
 	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
-	private JLabel ipAddressLbl, ipAddressDisplay, portLbl, portDisplay, roomIDLbl, roomIDDisplay, picLabel; 
+	private JLabel ipAddressLbl, ipAddressDisplay, portLbl, portDisplay, roomIDLbl, roomIDDisplay, imageLbl; 
 	private JTextField input;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
 	private JButton clearButton, submitButton;
 	private JMenuBar menu;
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
+	private ImageIcon infoImage;
 	
 
 	public CardReaderClient() {
@@ -137,27 +138,24 @@ public class CardReaderClient extends JFrame {
 	        }
 	    }).start();
 		
-	    /*Icon code
-	     * In declare: 
-	     * main code:
-	     * try {
-	     * whiteTile = new ImageIcon(Toolkit.getDefaultToolkit().createImage(CBallMaze.class.getResource("images/white32x32.jpg")));
-	     * }
-	     * catch (Exception e)
-	     * {
-	     * private Icon	whiteTile;
-	     * }
-	     */
 	    
-	    BufferedImage myPicture = ImageIO.read(new File("path-to-file")); //http://www.softicons.com/toolbar-icons/build-icons-by-design-kindle [REFERENCE THIS]
-	    picLabel = new JLabel(new ImageIcon(myPicture));
+
+	      try {
+	      infoImage = new ImageIcon(this.getClass().getResource("images/Tick.png"));
+	      imageLbl = new JLabel(infoImage, JLabel.CENTER);
+	      }
+	      catch (Exception e)
+	      {
+	    	  JOptionPane.showMessageDialog(null, "Image not available");
+	      }
+	    
+	    
 	    
 		northDisplayPanel = new JPanel();
 		northDisplayPanel.setLayout(new GridLayout(4,1));
 		northDisplayPanel.add(input);
 		northDisplayPanel.add(currentTimeLbl);
 		northDisplayPanel.add(currentTimeDisplay);
-		northDisplayPanel.add(picLabel);
 	}
 	
 	private void buildSouthDisplayPanel(){
