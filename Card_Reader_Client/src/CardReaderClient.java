@@ -137,6 +137,18 @@ public class CardReaderClient extends JFrame {
 	        }
 	    }).start();
 		
+	    /*Icon code
+	     * In declare: 
+	     * main code:
+	     * try {
+	     * whiteTile = new ImageIcon(Toolkit.getDefaultToolkit().createImage(CBallMaze.class.getResource("images/white32x32.jpg")));
+	     * }
+	     * catch (Exception e)
+	     * {
+	     * private Icon	whiteTile;
+	     * }
+	     */
+	    
 	    BufferedImage myPicture = ImageIO.read(new File("path-to-file")); //http://www.softicons.com/toolbar-icons/build-icons-by-design-kindle [REFERENCE THIS]
 	    picLabel = new JLabel(new ImageIcon(myPicture));
 	    
