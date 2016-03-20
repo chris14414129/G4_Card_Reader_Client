@@ -69,7 +69,7 @@ public class Session extends Thread {
 						if (operation.equals("UPD"))
 						{
 							//System.out.println("if2");
-						CardReaderClient.sessionInfo(sesCode, sesName, startTime, endTime);
+				//		CardReaderClient.sessionInfo(sesCode, sesName, startTime, endTime);
 						}
 						
 					}
