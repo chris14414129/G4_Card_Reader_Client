@@ -48,7 +48,16 @@ import java.util.Scanner;
 
 public class CardReaderClient extends JFrame {
 	
-	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
+	private JLabel startTimeLbl;
+	private static JLabel startTimeDisplay;
+	private JLabel endTimeLbl;
+	private static JLabel endTimeDisplay;
+	private JLabel currentTimeLbl;
+	private JLabel currentTimeDisplay;
+	private JLabel sessionCodeLbl;
+	private static JLabel sessionCodeDisplay;
+	private JLabel sessionNameLbl;
+	private static JLabel sessionNameDisplay;
 	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl; 
 	private JTextField input, ipAddressField, portNoField, roomIDField;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
@@ -57,7 +66,9 @@ public class CardReaderClient extends JFrame {
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
 	private ImageIcon infoImage;
-	private String ipAddress = "", portNo = "", roomID = "";
+	private String ipAddress = "";
+	private int portNo = 0, roomID = 0;
+
 	
 	
 
@@ -236,7 +247,7 @@ public class CardReaderClient extends JFrame {
 			Object src = e.getSource();
 			
 			if (src == exitItem){
-				System.exit(0);
+				exit();
 			}
 			if (src == clearBtn){
 				input.setText("");
@@ -251,15 +262,15 @@ public class CardReaderClient extends JFrame {
 				ipAddressField.setText("");
 				ipAddress = "";
 				portNoField.setText("");
-				portNo = "";
+				portNo = 0;
 				roomIDField.setText("");
-				roomID = "";
+				roomID = 0;
 				checkSettingInputs();
 			}
 			if (src == settingsSubmitBtn){
 				ipAddress = ipAddressField.getText();
-				portNo = portNoField.getText();
-				roomID = roomIDField.getText();
+				portNo = Integer.getInteger(portNoField.getText());
+				roomID = Integer.getInteger(roomIDField.getText());
 				checkSettingInputs();
 			}
 		}
@@ -318,7 +329,7 @@ public class CardReaderClient extends JFrame {
 	 
 	 public void checkSettingInputs(){
 		 
-	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("")){
+	      if (ipAddress.equals("") || portNo==0 || roomID==0){
 	    	  clearBtn.setEnabled(false);
 	    	  submitBtn.setEnabled(false);
 	      }
@@ -329,10 +340,32 @@ public class CardReaderClient extends JFrame {
 	 }
 	 
 	 
+	 public static void exit()
+	 {
+		 System.exit(0);
+	 }
+	 
+	 public static void sessionInfo(String sesCode,String sesName,String start, String end) {
+		 sessionCodeDisplay.setText(sesCode);
+		 sessionNameDisplay.setText(sesName);
+		 startTimeDisplay.setText(start);
+		 endTimeDisplay.setText(end);
+		
+	}
+	 
+	
 		
 	public static void main(String[] args) {
 		CardReaderClient CardReader = new CardReaderClient();
 		/* JOptionPane.showMessageDialog(null, "My Goodness, this is so concise"); */
+		// startTimeDisplay.setText("hello");
+		
+		Session ses = new Session("127.0.0.1", 4455, 14);
+		ses.start();
 	}
+
+	
+
+	
 }
 
