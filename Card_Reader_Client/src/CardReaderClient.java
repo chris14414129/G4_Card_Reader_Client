@@ -58,14 +58,18 @@ public class CardReaderClient extends JFrame {
 	private static JLabel sessionCodeDisplay;
 	private JLabel sessionNameLbl;
 	private static JLabel sessionNameDisplay;
-	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl; 
+	private JLabel ipAddressLbl, portLbl, roomIDLbl;
+	private static JLabel imageLbl; 
 	private JTextField input, ipAddressField, portNoField, roomIDField;
-	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
+	private JPanel displayPanel, buttonPanel;
+	private static JPanel northDisplayPanel;
+	private JPanel southDisplayPanel;
+	private JPanel settingsPanel;
 	private JButton clearBtn, submitBtn, settingsClearBtn, settingsSubmitBtn;
 	private JMenuBar menu;
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
-	private ImageIcon infoImage;
+	private static ImageIcon infoImage;
 	private String ipAddress = "";
 	private int portNo = 0, roomID = 0;
 
@@ -165,16 +169,7 @@ public class CardReaderClient extends JFrame {
 		northDisplayPanel.add(currentTimeDisplay);
 		
 //GENERATING IMAGE CODE
-	      try {
-	      infoImage = new ImageIcon("images/Tick.png");
-	      imageLbl = new JLabel(infoImage, JLabel.CENTER);
-	      }
-	      catch (Exception e)
-	      {
-	    	  JOptionPane.showMessageDialog(null, "Error. Could not load image!");
-	      }
-	    
-	    northDisplayPanel.add(imageLbl);
+	     
 	    
 	    
 		
@@ -353,6 +348,32 @@ public class CardReaderClient extends JFrame {
 		
 	}
 	 
+	 public static void status(String status)
+	 {
+		 ImageIcon fail = null;
+		 ImageIcon alert = null;
+		
+		 try {
+		      infoImage = new ImageIcon("images/Tick.png");
+		      fail = new ImageIcon("image/Cross.png");
+		       alert = new ImageIcon("image/Alert.png");
+		      }
+		      catch (Exception e)
+		      {
+		    	  JOptionPane.showMessageDialog(null, "Error. Could not load image!");
+		      }
+		    
+		    northDisplayPanel.add(imageLbl);
+		 
+		 
+		if(status.equals("ok")) 
+			  imageLbl = new JLabel(infoImage, JLabel.CENTER);
+		else if (status.equals("late"))
+			imageLbl = new JLabel(alert, JLabel.CENTER);
+		else 
+			imageLbl = new JLabel(fail, JLabel.CENTER);
+	 }
+	 
 	
 		
 	public static void main(String[] args) {
@@ -362,6 +383,8 @@ public class CardReaderClient extends JFrame {
 		
 		Session ses = new Session("127.0.0.1", 4455, 14);
 		ses.start();
+		
+		status ()
 	}
 
 	
