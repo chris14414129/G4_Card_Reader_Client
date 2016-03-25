@@ -134,8 +134,6 @@ public class CardReaderClient extends JFrame {
         currentTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         currentTimeDisplay.setFont(font);
 		
-		
-		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	    
 	    new Timer(1000, new ActionListener() {
@@ -155,11 +153,12 @@ public class CardReaderClient extends JFrame {
 		northDisplayPanel.add(currentTimeDisplay);
 		
 		imageLbl = new JLabel("", JLabel.CENTER);
+		imageLbl.setIcon(null);
 	    northDisplayPanel.add(imageLbl);
 	}
 	
 	private void updateImage(int x){
-			  tick = true;
+			tick = true;
 			timer = new Timer(3000, new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
