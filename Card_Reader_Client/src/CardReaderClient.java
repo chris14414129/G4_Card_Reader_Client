@@ -49,15 +49,17 @@ import java.util.Scanner;
 public class CardReaderClient extends JFrame {
 	
 	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
-	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl; 
-	private JTextField input, ipAddressField, portNoField, roomIDField;
+	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl, broadcastIPLbl; 
+	private JTextField input, ipAddressField, portNoField, roomIDField, broadcastIPField;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
-	private JButton clearBtn, submitBtn, settingsClearBtn, settingsSubmitBtn;
+	private JButton clearBtn, submitBtn, settingsClearBtn, settingsSubmitBtn, testBtn;
 	private JMenuBar menu;
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
 	private ImageIcon infoImage;
-	private String ipAddress = "", portNo = "", roomID = "";
+	private String ipAddress = "", portNo = "", roomID = "", broadcastIP = "";
+	private Timer timer;
+	private boolean tick = true;
 	
 	
 
@@ -135,9 +137,8 @@ public class CardReaderClient extends JFrame {
 		
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		int interval = 1000;
 	    
-	    new Timer(interval, new ActionListener() {
+	    new Timer(1000, new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            Calendar now = Calendar.getInstance();
@@ -153,21 +154,41 @@ public class CardReaderClient extends JFrame {
 		northDisplayPanel.add(currentTimeLbl);
 		northDisplayPanel.add(currentTimeDisplay);
 		
-//GENERATING IMAGE CODE
-	      try {
-	      infoImage = new ImageIcon("images/Tick.png");
-	      imageLbl = new JLabel(infoImage, JLabel.CENTER);
-	      }
-	      catch (Exception e)
-	      {
-	    	  JOptionPane.showMessageDialog(null, "Error. Could not load image!");
-	      }
-	    
+		imageLbl = new JLabel("", JLabel.CENTER);
 	    northDisplayPanel.add(imageLbl);
-	    
-	    
-		
-		
+	}
+	
+	private void updateImage(int x){
+			  
+			timer = new Timer(5000, new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (tick){
+						  if (x == 0){ //0 meaning that the registration was successful (correct session etc.) TICK
+				        	infoImage = new ImageIcon("images/Tick.png");
+						    imageLbl.setIcon(infoImage);
+						    tick = false;
+						  }
+						  
+						  if (x == 1){ //1 meaning correct module but incorrect session ALERT
+					        	infoImage = new ImageIcon("images/Alert.png");
+							    imageLbl.setIcon(infoImage);
+							    tick = false;
+						  }
+						  
+						  if (x == 2){ //2 meaning that registration was unsuccessful CROSS 
+					        	infoImage = new ImageIcon("images/Cross.png");
+							    imageLbl.setIcon(infoImage);
+							    tick = false;
+						  }
+					}
+					if (tick = false){
+							  imageLbl.setIcon(null);
+					}
+				}
+			});
+			timer.start();
+			
 	}
 	
 	private void buildSouthDisplayPanel(){
@@ -219,13 +240,15 @@ public class CardReaderClient extends JFrame {
 	      
 	      submitBtn = new JButton("SUBMIT");
 	      clearBtn = new JButton("CLEAR");
+	      testBtn = new JButton("TEST");
 	      
 	      submitBtn.addActionListener(new actionListener());
 	      clearBtn.addActionListener(new actionListener());
+	      testBtn.addActionListener(new actionListener());
 	      
 	      buttonPanel.add(submitBtn, BorderLayout.WEST);
 	      buttonPanel.add(clearBtn, BorderLayout.EAST);
-	      
+	      buttonPanel.add(testBtn);
 	      checkSettingInputs();
 	      
 	      
@@ -254,13 +277,19 @@ public class CardReaderClient extends JFrame {
 				portNo = "";
 				roomIDField.setText("");
 				roomID = "";
+				broadcastIPField.setText("");
+				broadcastIP = "";
 				checkSettingInputs();
 			}
 			if (src == settingsSubmitBtn){
 				ipAddress = ipAddressField.getText();
 				portNo = portNoField.getText();
 				roomID = roomIDField.getText();
+				broadcastIP = broadcastIPField.getText();
 				checkSettingInputs();
+			}
+			if (src == testBtn){
+				updateImage(0);
 			}
 		}
 	} 
@@ -275,7 +304,7 @@ public class CardReaderClient extends JFrame {
 		      
 		      
 		      settingsPanel = new JPanel();
-		      settingsPanel.setLayout(new GridLayout(4,2));
+		      settingsPanel.setLayout(new GridLayout(5,2));
 		      
 		      
 		      ipAddressLbl = new JLabel("IP Address: ");
@@ -286,6 +315,8 @@ public class CardReaderClient extends JFrame {
 		      portNoField.setEditable(true);
 		      roomIDLbl = new JLabel("Room ID: ");
 		      roomIDField = new JTextField(roomID);
+		      broadcastIPLbl = new JLabel("Broadcast IP: ");
+		      broadcastIPField = new JTextField(broadcastIP);
 		      roomIDField.setEditable(true);
 		      
 		      settingsSubmitBtn = new JButton("Submit");
@@ -300,6 +331,8 @@ public class CardReaderClient extends JFrame {
 		      settingsPanel.add(portNoField);
 		      settingsPanel.add(roomIDLbl);
 		      settingsPanel.add(roomIDField);
+		      settingsPanel.add(broadcastIPLbl);
+		      settingsPanel.add(broadcastIPField);
 		      settingsPanel.add(settingsSubmitBtn);
 		      settingsPanel.add(settingsClearBtn);
 		      
@@ -318,7 +351,7 @@ public class CardReaderClient extends JFrame {
 	 
 	 public void checkSettingInputs(){
 		 
-	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("")){
+	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("") || broadcastIP.equals("")){
 	    	  clearBtn.setEnabled(false);
 	    	  submitBtn.setEnabled(false);
 	      }
