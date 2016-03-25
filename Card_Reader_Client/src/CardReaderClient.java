@@ -159,8 +159,8 @@ public class CardReaderClient extends JFrame {
 	}
 	
 	private void updateImage(int x){
-			  
-			timer = new Timer(5000, new ActionListener(){
+			  tick = true;
+			timer = new Timer(3000, new ActionListener(){
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (tick){
@@ -182,11 +182,12 @@ public class CardReaderClient extends JFrame {
 							    tick = false;
 						  }
 					}
-					if (tick = false){
+					else {
 							  imageLbl.setIcon(null);
 					}
 				}
 			});
+			timer.setInitialDelay(0);
 			timer.start();
 			
 	}
@@ -289,7 +290,7 @@ public class CardReaderClient extends JFrame {
 				checkSettingInputs();
 			}
 			if (src == testBtn){
-				updateImage(0);
+				updateImage(1);
 			}
 		}
 	} 
