@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 public class Settings {
 	
 	private JDialog settings;
-	private JPanel settingsPanel;
+	private JPanel settingsPanel, buttonPanel;
 	private JLabel ipAddressLbl, portLbl, roomIDLbl, broadcastIPLbl;
 	private JTextField ipAddressField, portNoField, roomIDField, broadcastIPField;
 	private JButton submitBtn, clearBtn;
@@ -21,12 +21,16 @@ public class Settings {
 	private static boolean blank = true;
 	
 	public Settings(JFrame parentFrame) {
+		settings = new JDialog(parentFrame, true);
 		settings.setTitle("Settings");
+		settings.setModal(true);
 		settings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		buildSettingsPanel();
+		buildButtonPanel();
 		
 		settings.add(settingsPanel);
+		settings.add(buttonPanel);
 		
 		settings.setLocationRelativeTo(null);
 		settings.pack();
@@ -37,7 +41,7 @@ public class Settings {
 	private void buildSettingsPanel(){
 		
 		settingsPanel = new JPanel();
-	    settingsPanel.setLayout(new GridLayout(5,2));
+	    settingsPanel.setLayout(new GridLayout(4,2));
 	    
 	    ipAddressLbl = new JLabel("IP Address: ");
 	    ipAddressField = new JTextField(ipAddress);
@@ -48,14 +52,29 @@ public class Settings {
 	    broadcastIPLbl = new JLabel("Broadcast IP: ");
 	    broadcastIPField = new JTextField(broadcastIP);
 	    
-	    submitBtn = new JButton("Submit");
+	    settingsPanel.add(ipAddressLbl);
+	    settingsPanel.add(ipAddressField);
+	    settingsPanel.add(portLbl);
+	    settingsPanel.add(portNoField);
+	    settingsPanel.add(roomIDLbl);
+	    settingsPanel.add(roomIDField);
+	    settingsPanel.add(broadcastIPLbl);
+	    settingsPanel.add(broadcastIPField);
+	    
+	}
+	
+	private void buildButtonPanel(){
+		buttonPanel = new JPanel();
+		
+		submitBtn = new JButton("Submit");
 	    clearBtn = new JButton("Clear");
 	    clearBtn.setEnabled(false);
 	    
 	    submitBtn.addActionListener(new actionListener());
 	    clearBtn.addActionListener(new actionListener());
 	    
-	    
+	    buttonPanel.add(clearBtn);
+	    buttonPanel.add(submitBtn);
 	}
 	
 	public static boolean returnBoolean(){

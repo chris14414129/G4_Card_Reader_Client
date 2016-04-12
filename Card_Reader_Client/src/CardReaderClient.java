@@ -66,6 +66,7 @@ public class CardReaderClient {
 	
 
 	public CardReaderClient() {
+		window = new JFrame();
 	      window.setTitle("Card Reader");
 	      window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -282,7 +283,7 @@ public class CardReaderClient {
 	
 		
 	public static void main(String[] args) {
-		CardReaderClient CardReader = new CardReaderClient();
+		 new CardReaderClient();
 		/* JOptionPane.showMessageDialog(null, "My Goodness, this is so concise"); */
 	}
 }
