@@ -83,7 +83,6 @@ public class CardReaderGUI {
 	}
 	
 	private void buildDisplayPanel(){
-
 	      displayPanel = new JPanel();
 	      displayPanel.setLayout(new BorderLayout());
 	      displayPanel.setBackground(Color.CYAN);
@@ -92,8 +91,6 @@ public class CardReaderGUI {
 	      
 	      displayPanel.add(northDisplayPanel, BorderLayout.NORTH);
 	      displayPanel.add(southDisplayPanel, BorderLayout.SOUTH);
-	      
-	      
 	}
 	
 	
@@ -243,8 +240,9 @@ public class CardReaderGUI {
 				input.setText("");
 			}
 			if (src == submitBtn){		
-				input.setText("ID SUBMITTED!");
+				
 				studentId = input.getText().trim();
+				input.setText("ID SUBMITTED!");
 				Registration reg = new Registration(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.clientPort), Integer.parseInt(Settings.roomID));
 				reg.register(studentId);
 				
