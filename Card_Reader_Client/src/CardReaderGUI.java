@@ -17,18 +17,26 @@ import javax.swing.border.LineBorder;
 
 public class CardReaderGUI {
 	private JFrame window;
-	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay; 
-	private JLabel sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
-	private JLabel imageLbl; 
+	private JLabel startTimeLbl;
+	private static JLabel startTimeDisplay;
+	private JLabel endTimeLbl;
+	private static JLabel endTimeDisplay;
+	private JLabel currentTimeLbl;
+	private JLabel currentTimeDisplay; 
+	private JLabel sessionCodeLbl;
+	private static JLabel sessionCodeDisplay;
+	private JLabel sessionNameLbl;
+	private static JLabel sessionNameDisplay;
+	private static JLabel imageLbl; 
 	private JTextField input;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel;
 	private JButton clearBtn, submitBtn, settingsClearBtn;
 	private JMenuBar menu;
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
-	private ImageIcon infoImage;
-	private Timer timer;
-	private boolean tick = true;
+	private static ImageIcon infoImage;
+	private static Timer timer;
+	private static boolean tick = true;
 	private String startTime, endTime, sessionName, sessionCode;
 
 	private String studentId;
@@ -182,7 +190,7 @@ public class CardReaderGUI {
 	      buttonPanel.add(clearBtn, BorderLayout.EAST);
 	}
 	
-	private void updateText(String startTime, String endTime, String sessionName, String sessionCode){
+	static void updateText(String startTime, String endTime, String sessionName, String sessionCode){
 		
 		startTimeDisplay.setText(startTime);
 		endTimeDisplay.setText(endTime);
@@ -190,7 +198,7 @@ public class CardReaderGUI {
 		sessionCodeDisplay.setText(sessionCode);
 		
 	}
-	private void updateImage(int x){
+	static void updateImage(int x){
 		tick = true;
 		timer = new Timer(3000, new ActionListener(){
 			@Override
