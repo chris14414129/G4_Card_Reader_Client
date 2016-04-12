@@ -170,7 +170,6 @@ public class CardReaderGUI {
 	}
 	
 	private void buildButtonPanel(){
-
 	      buttonPanel = new JPanel();
 	      buttonPanel.setBackground(Color.LIGHT_GRAY);
 	      buttonPanel.setPreferredSize(new Dimension(500, 45));
@@ -188,7 +187,6 @@ public class CardReaderGUI {
 	}
 	
 	static void updateText(String startTime, String endTime, String sessionName, String sessionCode){
-		
 		startTimeDisplay.setText(startTime);
 		endTimeDisplay.setText(endTime);
 		sessionNameDisplay.setText(sessionName);
@@ -248,10 +246,10 @@ public class CardReaderGUI {
 				
 			}
 			if (src == settingsItem){
-				new Settings(window);
 				if (Settings.returnBoolean() == false){
 					submitBtn.setEnabled(true);
 				}
+				new Settings(window);	
 			}
 			if (src == settingsClearBtn){
 				
