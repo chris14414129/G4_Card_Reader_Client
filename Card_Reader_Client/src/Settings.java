@@ -15,12 +15,16 @@ public class Settings {
 	
 	private JDialog settings;
 	private JPanel settingsPanel, buttonPanel;
-	private JLabel serverPortLbl, clientPortLbl, roomIDLbl, broadcastIPLbl;
-	private JTextField serverPortInput, clientPortInput, roomIDInput, broadcastIPInput;
-	private JButton submitBtn, clearBtn;
+	private JLabel serverPortLbl, clientPortLbl, clientPortLbl2, roomIDLbl, broadcastIPLbl;
+	private static JTextField serverPortInput;
+	private static JTextField clientPortInput;
+	private static JTextField roomIDInput;
+	private static JTextField broadcastIPInput;
+	private static JTextField clientPortInput2;
+	private JButton submitBtn;
+	private static JButton clearBtn;
 	
-	public static String clientPort = "4456", serverPort = "4455", roomID = "111", broadcastIP = "127.0.0.1";
-	private static boolean blank = true;
+	public static String clientPort = "4456", serverPort = "4455", roomID = "111", broadcastIP = "127.0.0.1", clientPort2 = "";
 	
 	public Settings(JFrame parentFrame) {
 		settings = new JDialog(parentFrame, true);
@@ -44,12 +48,14 @@ public class Settings {
 	private void buildSettingsPanel(){
 		
 		settingsPanel = new JPanel();
-	    settingsPanel.setLayout(new GridLayout(4,2));
+	    settingsPanel.setLayout(new GridLayout(5,2));
 	    
 	    serverPortLbl = new JLabel("Server Port: ");
 	    serverPortInput = new JTextField(serverPort);
 	    clientPortLbl = new JLabel("Client Port: ");
 	    clientPortInput = new JTextField(clientPort);
+	    clientPortLbl2 = new JLabel("Client Port2: ");
+	    clientPortInput2 = new JTextField(clientPort2);
 	    roomIDLbl = new JLabel("Room ID: ");
 	    roomIDInput = new JTextField(roomID);
 	    broadcastIPLbl = new JLabel("Broadcast IP: ");
@@ -59,6 +65,8 @@ public class Settings {
 	    settingsPanel.add(serverPortInput);
 	    settingsPanel.add(clientPortLbl);
 	    settingsPanel.add(clientPortInput);
+	    settingsPanel.add(clientPortLbl2);
+	    settingsPanel.add(clientPortInput2);
 	    settingsPanel.add(roomIDLbl);
 	    settingsPanel.add(roomIDInput);
 	    settingsPanel.add(broadcastIPLbl);
@@ -71,7 +79,6 @@ public class Settings {
 		
 		submitBtn = new JButton("Submit");
 	    clearBtn = new JButton("Clear");
-	    clearBtn.setEnabled(false);
 	    
 	    submitBtn.addActionListener(new actionListener());
 	    clearBtn.addActionListener(new actionListener());
@@ -80,21 +87,6 @@ public class Settings {
 	    buttonPanel.add(submitBtn);
 	}
 	
-	public static boolean returnBoolean(){
-		return blank;
-	}
-	
-	public void checkSettingInputs(){
-		 
-	      if (serverPort.equals("") || clientPort.equals("") || roomID.equals("") || broadcastIP.equals("")){
-	    	  clearBtn.setEnabled(false);
-	    	  blank = true;
-	      }
-	      else {
-	    	  clearBtn.setEnabled(true);
-	    	  blank = false;
-	      }
-	 }
 	
 	 private class actionListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
@@ -104,19 +96,20 @@ public class Settings {
 					serverPort = "";
 					clientPortInput.setText("");
 					clientPort = "";
+					clientPortInput2.setText("");
+					clientPort2 = "";
 					roomIDInput.setText("");
 					roomID = "";
 					broadcastIPInput.setText("");
 					broadcastIP = "";
-					checkSettingInputs();
 				}
 				if (src == submitBtn){
 					if (!serverPortInput.getText().equals("") && !clientPortInput.getText().equals("") && !roomIDInput.getText().equals("") && !broadcastIPInput.getText().equals("")){
 						serverPort = serverPortInput.getText().trim();
 						clientPort = clientPortInput.getText().trim();
+						clientPort2 = clientPortInput2.getText().trim();
 						roomID = roomIDInput.getText().trim();
 						broadcastIP = broadcastIPInput.getText().trim();
-						checkSettingInputs();
 					}
 					else {
 						JOptionPane.showMessageDialog(null,  "Please fill in all text fields first!", "Error", 

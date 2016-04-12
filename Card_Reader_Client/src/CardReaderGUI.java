@@ -37,7 +37,6 @@ public class CardReaderGUI {
 	private static ImageIcon infoImage;
 	private static Timer timer;
 	private static boolean tick = true;
-	private String startTime, endTime, sessionName, sessionCode;
 
 	private String studentId;
 	
@@ -74,6 +73,7 @@ public class CardReaderGUI {
 	      
 	      window.add(displayPanel, BorderLayout.NORTH);
 	      window.add(buttonPanel, BorderLayout.SOUTH);
+	      
 	  
 	      window.pack();
 	      window.setVisible(true);
@@ -176,7 +176,6 @@ public class CardReaderGUI {
 	      buttonPanel.setBorder(new LineBorder(Color.GRAY, 5));
 	      
 	      submitBtn = new JButton("SUBMIT");
-	      submitBtn.setEnabled(false);
 	      clearBtn = new JButton("CLEAR");
 	      
 	      submitBtn.addActionListener(new actionListener());
@@ -246,9 +245,6 @@ public class CardReaderGUI {
 				
 			}
 			if (src == settingsItem){
-				if (Settings.returnBoolean() == false){
-					submitBtn.setEnabled(true);
-				}
 				new Settings(window);	
 			}
 			if (src == settingsClearBtn){
