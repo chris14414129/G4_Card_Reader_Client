@@ -2,10 +2,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -25,6 +27,7 @@ public class Settings {
 		settings.setTitle("Settings");
 		settings.setModal(true);
 		settings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		settings.setLayout(new BoxLayout(settings.getContentPane(), BoxLayout.Y_AXIS));
 		
 		buildSettingsPanel();
 		buildButtonPanel();
@@ -84,9 +87,11 @@ public class Settings {
 	public void checkSettingInputs(){
 		 
 	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("") || broadcastIP.equals("")){
+	    	  clearBtn.setEnabled(false);
 	    	  blank = true;
 	      }
 	      else {
+	    	  clearBtn.setEnabled(true);
 	    	  blank = false;
 	      }
 	 }
@@ -106,10 +111,17 @@ public class Settings {
 					checkSettingInputs();
 				}
 				if (src == submitBtn){
-					ipAddress = ipAddressField.getText().trim();
-					portNo = portNoField.getText().trim();
-					roomID = roomIDField.getText().trim();
-					broadcastIP = broadcastIPField.getText().trim();
+					if (!ipAddressField.getText().equals("") && !portNoField.getText().equals("") && !roomIDField.getText().equals("") && !broadcastIPField.getText().equals("")){
+						ipAddress = ipAddressField.getText().trim();
+						portNo = portNoField.getText().trim();
+						roomID = roomIDField.getText().trim();
+						broadcastIP = broadcastIPField.getText().trim();
+						checkSettingInputs();
+					}
+					else {
+						JOptionPane.showMessageDialog(null,  "Please fill in all text fields first!", "Error", 
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
 			}
