@@ -292,8 +292,8 @@ public class CardReaderClient {
 	
 		
 	public static void main(String[] args) {
-		 Session ses = new Session("127.0.0.1", 4455, 111);
-		 ses.start();
+	//	 Session ses = new Session("127.0.0.1", 4455, 111);
+		// ses.start();
 		 new CardReaderClient();
 		/* JOptionPane.showMessageDialog(null, "My Goodness, this is so concise"); */
 		
