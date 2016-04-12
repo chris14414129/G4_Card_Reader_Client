@@ -15,11 +15,11 @@ public class Settings {
 	
 	private JDialog settings;
 	private JPanel settingsPanel, buttonPanel;
-	private JLabel ipAddressLbl, portLbl, roomIDLbl, broadcastIPLbl;
-	private JTextField ipAddressField, portNoField, roomIDField, broadcastIPField;
+	private JLabel serverPortLbl, clientPortLbl, roomIDLbl, broadcastIPLbl;
+	private JTextField serverPortInput, clientPortInput, roomIDInput, broadcastIPInput;
 	private JButton submitBtn, clearBtn;
 	
-	private String ipAddress = "", portNo = "", roomID = "", broadcastIP = "";
+	public static String clientPort = "", serverPort = "", roomID = "", broadcastIP = "";
 	private static boolean blank = true;
 	
 	public Settings(JFrame parentFrame) {
@@ -46,23 +46,23 @@ public class Settings {
 		settingsPanel = new JPanel();
 	    settingsPanel.setLayout(new GridLayout(4,2));
 	    
-	    ipAddressLbl = new JLabel("IP Address: ");
-	    ipAddressField = new JTextField(ipAddress);
-	    portLbl = new JLabel("Port Number: ");
-	    portNoField = new JTextField(portNo);
+	    serverPortLbl = new JLabel("Server Port: ");
+	    serverPortInput = new JTextField(serverPort);
+	    clientPortLbl = new JLabel("Client Port: ");
+	    clientPortInput = new JTextField(clientPort);
 	    roomIDLbl = new JLabel("Room ID: ");
-	    roomIDField = new JTextField(roomID);
+	    roomIDInput = new JTextField(roomID);
 	    broadcastIPLbl = new JLabel("Broadcast IP: ");
-	    broadcastIPField = new JTextField(broadcastIP);
+	    broadcastIPInput = new JTextField(broadcastIP);
 	    
-	    settingsPanel.add(ipAddressLbl);
-	    settingsPanel.add(ipAddressField);
-	    settingsPanel.add(portLbl);
-	    settingsPanel.add(portNoField);
+	    settingsPanel.add(serverPortLbl);
+	    settingsPanel.add(serverPortInput);
+	    settingsPanel.add(clientPortLbl);
+	    settingsPanel.add(clientPortInput);
 	    settingsPanel.add(roomIDLbl);
-	    settingsPanel.add(roomIDField);
+	    settingsPanel.add(roomIDInput);
 	    settingsPanel.add(broadcastIPLbl);
-	    settingsPanel.add(broadcastIPField);
+	    settingsPanel.add(broadcastIPInput);
 	    
 	}
 	
@@ -86,7 +86,7 @@ public class Settings {
 	
 	public void checkSettingInputs(){
 		 
-	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("") || broadcastIP.equals("")){
+	      if (serverPort.equals("") || clientPort.equals("") || roomID.equals("") || broadcastIP.equals("")){
 	    	  clearBtn.setEnabled(false);
 	    	  blank = true;
 	      }
@@ -100,22 +100,22 @@ public class Settings {
 			public void actionPerformed(ActionEvent e){
 				Object src = e.getSource();
 				if (src == clearBtn){
-					ipAddressField.setText("");
-					ipAddress = "";
-					portNoField.setText("");
-					portNo = "";
-					roomIDField.setText("");
+					serverPortInput.setText("");
+					serverPort = "";
+					clientPortInput.setText("");
+					clientPort = "";
+					roomIDInput.setText("");
 					roomID = "";
-					broadcastIPField.setText("");
+					broadcastIPInput.setText("");
 					broadcastIP = "";
 					checkSettingInputs();
 				}
 				if (src == submitBtn){
-					if (!ipAddressField.getText().equals("") && !portNoField.getText().equals("") && !roomIDField.getText().equals("") && !broadcastIPField.getText().equals("")){
-						ipAddress = ipAddressField.getText().trim();
-						portNo = portNoField.getText().trim();
-						roomID = roomIDField.getText().trim();
-						broadcastIP = broadcastIPField.getText().trim();
+					if (!serverPortInput.getText().equals("") && !clientPortInput.getText().equals("") && !roomIDInput.getText().equals("") && !broadcastIPInput.getText().equals("")){
+						serverPort = serverPortInput.getText().trim();
+						clientPort = clientPortInput.getText().trim();
+						roomID = roomIDInput.getText().trim();
+						broadcastIP = broadcastIPInput.getText().trim();
 						checkSettingInputs();
 					}
 					else {

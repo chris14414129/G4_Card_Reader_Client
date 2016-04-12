@@ -37,7 +37,7 @@
 public class CardReaderClient {
 	public static void main(String[] args) {
 		 new CardReaderGUI();
-		 CardReaderGUI.updateText(startTime, endTime, sessionName, sessionCode);
+		 
 	
 	}
 }

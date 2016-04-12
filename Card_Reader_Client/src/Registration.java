@@ -10,7 +10,7 @@ public class Registration {
 	private int clientPort;
 	private int roomID;
 
-	public void Registration(String ip,int serverPort, int clientPort, int room)
+	public Registration(String ip,int serverPort, int clientPort, int room)
 	{
 		this.broadcastIP=ip;
 		this.serverPort=serverPort;

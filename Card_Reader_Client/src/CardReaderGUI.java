@@ -17,16 +17,8 @@ import javax.swing.border.LineBorder;
 
 public class CardReaderGUI {
 	private JFrame window;
-	private JLabel startTimeLbl;
-	private static JLabel startTimeDisplay;
-	private JLabel endTimeLbl;
-	private static JLabel endTimeDisplay;
-	private JLabel currentTimeLbl;
-	private JLabel currentTimeDisplay; 
-	private JLabel sessionCodeLbl;
-	private static JLabel sessionCodeDisplay;
-	private JLabel sessionNameLbl;
-	private static JLabel sessionNameDisplay;
+	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay; 
+	private JLabel sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
 	private JLabel imageLbl; 
 	private JTextField input;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel;
@@ -37,6 +29,7 @@ public class CardReaderGUI {
 	private ImageIcon infoImage;
 	private Timer timer;
 	private boolean tick = true;
+	private String startTime, endTime, sessionName, sessionCode;
 
 	private String studentId;
 	
@@ -189,7 +182,7 @@ public class CardReaderGUI {
 	      buttonPanel.add(clearBtn, BorderLayout.EAST);
 	}
 	
-	public static void updateText(String startTime, String endTime, String sessionName, String sessionCode){
+	private void updateText(String startTime, String endTime, String sessionName, String sessionCode){
 		
 		startTimeDisplay.setText(startTime);
 		endTimeDisplay.setText(endTime);
@@ -244,6 +237,8 @@ public class CardReaderGUI {
 			if (src == submitBtn){		
 				input.setText("ID SUBMITTED!");
 				studentId = input.getText().trim();
+				new Registration(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.clientPort), Integer.parseInt(Settings.roomID));
+				new Session(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.roomID));
 			}
 			if (src == settingsItem){
 				new Settings(window);
