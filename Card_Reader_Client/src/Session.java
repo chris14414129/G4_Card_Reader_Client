@@ -77,7 +77,7 @@ public class Session extends Thread {
 						}
 						
 					}
-					socket.close();
+					//socket.close();
 				}
 				
 				catch (IOException e)

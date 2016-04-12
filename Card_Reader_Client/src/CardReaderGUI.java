@@ -240,7 +240,7 @@ public class CardReaderGUI {
 				
 				studentId = input.getText().trim();
 				input.setText("ID SUBMITTED!");
-				Registration reg = new Registration(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.clientPort), Integer.parseInt(Settings.roomID));
+				Registration reg = new Registration(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.clientPort2), Integer.parseInt(Settings.roomID));
 				reg.register(studentId);
 				
 			}
