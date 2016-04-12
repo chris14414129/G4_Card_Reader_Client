@@ -37,7 +37,7 @@
 public class CardReaderClient {
 	public static void main(String[] args) {
 		 new CardReaderGUI();
-		 
+		 new Session(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.roomID));
 	
 	}
 }

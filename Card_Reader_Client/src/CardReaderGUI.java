@@ -246,7 +246,6 @@ public class CardReaderGUI {
 				input.setText("ID SUBMITTED!");
 				studentId = input.getText().trim();
 				new Registration(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.clientPort), Integer.parseInt(Settings.roomID));
-				new Session(Settings.broadcastIP, Integer.parseInt(Settings.serverPort), Integer.parseInt(Settings.roomID));
 			}
 			if (src == settingsItem){
 				new Settings(window);
