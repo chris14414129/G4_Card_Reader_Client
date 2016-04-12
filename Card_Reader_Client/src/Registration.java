@@ -47,15 +47,30 @@ public void register(String student_id)
           
         //  System.out.println ("Received packet: " + received);
           
-          boolean wait = false;
+          String RoomID = received.substring(0,3);
+			String operation = received.substring(3, 6);
+			String sesCode = received.substring(6,10);
+			
+			if (Integer.parseInt(RoomID) == (this.roomID))
+			{
+				if(operation.equals("PASS"))
+				{
+					CardReaderGUI.updateImage(0);
+				}
+				if(operation.equals("FAIL"))
+				{
+					CardReaderGUI.updateImage(2);
+				}
+				if(operation.equals("LATE"))
+				{
+					CardReaderGUI.updateImage(1);
+				}
+				
+			}
           
-          while (wait == false)
-          {
-        	  System.out.println("wait");
-        	  wait = true;
-          }
           
-          wait = false;
+          
+          
           recSocket.close();
 
 		}
