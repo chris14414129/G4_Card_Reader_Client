@@ -17,8 +17,16 @@ import javax.swing.border.LineBorder;
 
 public class CardReaderGUI {
 	private JFrame window;
-	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay; 
-	private JLabel sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
+	private JLabel startTimeLbl;
+	private static JLabel startTimeDisplay;
+	private JLabel endTimeLbl;
+	private static JLabel endTimeDisplay;
+	private JLabel currentTimeLbl;
+	private JLabel currentTimeDisplay; 
+	private JLabel sessionCodeLbl;
+	private static JLabel sessionCodeDisplay;
+	private JLabel sessionNameLbl;
+	private static JLabel sessionNameDisplay;
 	private JLabel imageLbl; 
 	private JTextField input;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel;
@@ -181,7 +189,7 @@ public class CardReaderGUI {
 	      buttonPanel.add(clearBtn, BorderLayout.EAST);
 	}
 	
-	private void updateText(String startTime, String endTime, String sessionName, String sessionCode){
+	public static void updateText(String startTime, String endTime, String sessionName, String sessionCode){
 		
 		startTimeDisplay.setText(startTime);
 		endTimeDisplay.setText(endTime);
