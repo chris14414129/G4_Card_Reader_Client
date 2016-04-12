@@ -45,7 +45,7 @@ public void register(String student_id)
           recSocket.receive (recPacket);
           String received = new String (recPacket.getData());
           
-        //  System.out.println ("Received packet: " + received);
+          System.out.println ("Received packet: " + received);
           
           String RoomID = received.substring(0,3);
 			String operation = received.substring(3, 6);

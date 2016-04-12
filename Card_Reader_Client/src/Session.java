@@ -5,13 +5,13 @@ import java.net.DatagramSocket;
 
 public class Session extends Thread {
 	private String broadcastIP;
-	private int serverPort;
+	private int clientPort;
 	private int roomID;
 	
 	public Session(String ip,int port, int room)
 	{
 		this.broadcastIP=ip;
-		this.serverPort=port;
+		this.clientPort=port;
 		this.roomID=room;
 	}
 
@@ -34,7 +34,7 @@ public class Session extends Thread {
 				try
 				{
 					System.out.println("test");
-					socket = new DatagramSocket (this.serverPort);
+					socket = new DatagramSocket (this.clientPort);
 			           
 			            byte[] buf = new byte[256];
 			 
