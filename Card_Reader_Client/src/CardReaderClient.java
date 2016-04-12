@@ -1,15 +1,3 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentListener;
-
-import java.util.Calendar;
-import java.util.Scanner;
 
 /* Commands for communication
  * XXXYYYREST
