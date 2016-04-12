@@ -17,7 +17,7 @@ public class Session extends Thread {
 
 	public void run()
 	{
-		
+		System.out.println("test");
 		
 		
 		 DatagramSocket socket = null;
@@ -33,6 +33,7 @@ public class Session extends Thread {
 			{	
 				try
 				{
+					System.out.println("test");
 					socket = new DatagramSocket (4455);
 			           
 			            byte[] buf = new byte[256];
@@ -52,29 +53,33 @@ public class Session extends Thread {
 					String startTime = received.substring(47,55);
 					String endTime = received.substring(55, 63);
 					
-				/*	System.out.println(inRoomID);
-					System.out.println(operation);
-					System.out.println(sesCode);
-					System.out.println(sesName);
-					System.out.println(startTime);
-					System.out.println(endTime);*/
+					System.out.println("roomid: "+inRoomID);
+					System.out.println("operation: "+operation);
+					System.out.println("sescode: "+sesCode);
+					System.out.println("sesname: "+sesName);
+					System.out.println("starttime: "+startTime);
+					System.out.println("endtime: "+endTime);
 					
 					//public static void sessionInfo(String sesCode,String sesName,String start, String end)
 					
+					System.out.println("if");
 					
-					if (inRoomID.equals("014"))	
+					if (Integer.parseInt(inRoomID) == (this.roomID))
 					{
-						//System.out.println("if1");
+						System.out.println("if1");
 						
 						if (operation.equals("UPD"))
 						{
-							//System.out.println("if2");
+							System.out.println("if2");
 				//		CardReaderClient.sessionInfo(sesCode, sesName, startTime, endTime);
+							CardReaderClient.updateText(startTime,endTime, sesName, sesCode);
+							
 						}
 						
 					}
 					socket.close();
 				}
+				
 				catch (IOException e)
 				{
 					System.out.println(e);

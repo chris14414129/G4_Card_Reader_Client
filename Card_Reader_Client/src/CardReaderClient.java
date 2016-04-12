@@ -50,7 +50,16 @@ public class CardReaderClient {
 	
 	
 	private JFrame window;
-	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
+	private JLabel startTimeLbl;
+	private static JLabel startTimeDisplay;
+	private JLabel endTimeLbl;
+	private static JLabel endTimeDisplay;
+	private JLabel currentTimeLbl;
+	private JLabel currentTimeDisplay;
+	private JLabel sessionCodeLbl;
+	private static JLabel sessionCodeDisplay;
+	private JLabel sessionNameLbl;
+	private static JLabel sessionNameDisplay;
 	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl, broadcastIPLbl; 
 	private JTextField input, ipAddressField, portNoField, roomIDField, broadcastIPField;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
@@ -213,7 +222,7 @@ public class CardReaderClient {
 	      buttonPanel.add(clearBtn, BorderLayout.EAST);
 	}
 	
-	private void updateText(String startTime, String endTime, String sessionName, String sessionCode){
+	  static void updateText(String startTime, String endTime, String sessionName, String sessionCode){
 		
 		startTimeDisplay.setText(startTime);
 		endTimeDisplay.setText(endTime);
@@ -283,8 +292,11 @@ public class CardReaderClient {
 	
 		
 	public static void main(String[] args) {
+		 Session ses = new Session("127.0.0.1", 4455, 111);
+		 ses.start();
 		 new CardReaderClient();
 		/* JOptionPane.showMessageDialog(null, "My Goodness, this is so concise"); */
+		
 	}
 }
 
