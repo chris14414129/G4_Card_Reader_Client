@@ -19,7 +19,7 @@ public class Settings {
 	private JTextField serverPortInput, clientPortInput, roomIDInput, broadcastIPInput;
 	private JButton submitBtn, clearBtn;
 	
-	public static String clientPort = "", serverPort = "", roomID = "", broadcastIP = "";
+	public static String clientPort = "4456", serverPort = "4455", roomID = "111", broadcastIP = "127.0.0.1";
 	private static boolean blank = true;
 	
 	public Settings(JFrame parentFrame) {

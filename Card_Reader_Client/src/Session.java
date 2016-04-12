@@ -34,7 +34,7 @@ public class Session extends Thread {
 				try
 				{
 					System.out.println("test");
-					socket = new DatagramSocket (4455);
+					socket = new DatagramSocket (this.serverPort);
 			           
 			            byte[] buf = new byte[256];
 			 
