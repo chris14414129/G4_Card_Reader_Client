@@ -46,26 +46,28 @@ import java.util.Scanner;
 
 
 
-public class CardReaderClient extends JFrame {
+public class CardReaderClient {
 	
+	
+	private JFrame window;
 	private JLabel startTimeLbl, startTimeDisplay, endTimeLbl, endTimeDisplay, currentTimeLbl, currentTimeDisplay, sessionCodeLbl, sessionCodeDisplay, sessionNameLbl, sessionNameDisplay;
 	private JLabel ipAddressLbl, portLbl, roomIDLbl, imageLbl, broadcastIPLbl; 
 	private JTextField input, ipAddressField, portNoField, roomIDField, broadcastIPField;
 	private JPanel displayPanel, buttonPanel, northDisplayPanel, southDisplayPanel, settingsPanel;
-	private JButton clearBtn, submitBtn, settingsClearBtn, settingsSubmitBtn, testBtn;
+	private JButton clearBtn, submitBtn, settingsClearBtn, settingsSubmitBtn;
 	private JMenuBar menu;
 	private JMenu fileMenu, optionsMenu;
 	private JMenuItem exitItem, settingsItem;
 	private ImageIcon infoImage;
-	private String ipAddress = "", portNo = "", roomID = "", broadcastIP = "";
 	private Timer timer;
 	private boolean tick = true;
-	
+
+	private String studentId;
 	
 
 	public CardReaderClient() {
-	      setTitle("Card Reader");
-	      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      window.setTitle("Card Reader");
+	      window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	      buildButtonPanel();
 	      buildSouthDisplayPanel();
@@ -83,7 +85,6 @@ public class CardReaderClient extends JFrame {
 	      settingsItem = new JMenuItem("Settings");
 	      settingsItem.setMnemonic(KeyEvent.VK_S);
 	      
-	      
 	      settingsItem.addActionListener(new actionListener());
 	      exitItem.addActionListener(new actionListener());
 	      
@@ -91,18 +92,16 @@ public class CardReaderClient extends JFrame {
 	      optionsMenu.add(settingsItem);
 	      menu.add(fileMenu);
 	      menu.add(optionsMenu);
-	      setJMenuBar(menu);
+	      window.setJMenuBar(menu);
 	      
-	      
-	      add(displayPanel, BorderLayout.NORTH);
-	      add(buttonPanel, BorderLayout.SOUTH);
+	      window.add(displayPanel, BorderLayout.NORTH);
+	      window.add(buttonPanel, BorderLayout.SOUTH);
 	  
-	      pack();
+	      window.pack();
+	      window.setVisible(true);
+	      window.setResizable(false); 
 	      
-	      setVisible(true);
-	      setResizable(false); 
-	      
-	      setLocationRelativeTo( null );
+	      window.setLocationRelativeTo( null );
 	}
 	
 	private void buildDisplayPanel(){
@@ -157,40 +156,6 @@ public class CardReaderClient extends JFrame {
 	    northDisplayPanel.add(imageLbl);
 	}
 	
-	private void updateImage(int x){
-			tick = true;
-			timer = new Timer(3000, new ActionListener(){
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (tick){
-						  if (x == 0){ //0 meaning that the registration was successful (correct session etc.) TICK
-				        	infoImage = new ImageIcon("images/Tick.png");
-						    imageLbl.setIcon(infoImage);
-						    tick = false;
-						  }
-						  
-						  if (x == 1){ //1 meaning correct module but incorrect session ALERT
-					        	infoImage = new ImageIcon("images/Alert.png");
-							    imageLbl.setIcon(infoImage);
-							    tick = false;
-						  }
-						  
-						  if (x == 2){ //2 meaning that registration was unsuccessful CROSS 
-					        	infoImage = new ImageIcon("images/Cross.png");
-							    imageLbl.setIcon(infoImage);
-							    tick = false;
-						  }
-					}
-					else {
-							  imageLbl.setIcon(null);
-					}
-				}
-			});
-			timer.setInitialDelay(0);
-			timer.start();
-			
-	}
-	
 	private void buildSouthDisplayPanel(){
 		
 		southDisplayPanel = new JPanel();
@@ -226,9 +191,7 @@ public class CardReaderClient extends JFrame {
 	    southDisplayPanel.add(startTimeDisplay);
 	    southDisplayPanel.add(endTimeDisplay);
 	    		
-	    setLocationRelativeTo(null);
-	    
-	      
+
 	}
 	
 	private void buildButtonPanel(){
@@ -239,19 +202,56 @@ public class CardReaderClient extends JFrame {
 	      buttonPanel.setBorder(new LineBorder(Color.GRAY, 5));
 	      
 	      submitBtn = new JButton("SUBMIT");
+	      submitBtn.setEnabled(false);
 	      clearBtn = new JButton("CLEAR");
-	      testBtn = new JButton("TEST");
 	      
 	      submitBtn.addActionListener(new actionListener());
 	      clearBtn.addActionListener(new actionListener());
-	      testBtn.addActionListener(new actionListener());
 	      
 	      buttonPanel.add(submitBtn, BorderLayout.WEST);
 	      buttonPanel.add(clearBtn, BorderLayout.EAST);
-	      buttonPanel.add(testBtn);
-	      checkSettingInputs();
-	      
-	      
+	}
+	
+	private void updateText(String startTime, String endTime, String sessionName, String sessionCode){
+		
+		startTimeDisplay.setText(startTime);
+		endTimeDisplay.setText(endTime);
+		sessionNameDisplay.setText(sessionName);
+		sessionCodeDisplay.setText(sessionCode);
+		
+	}
+	private void updateImage(int x){
+		tick = true;
+		timer = new Timer(3000, new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (tick){
+					  if (x == 0){ //0 meaning that the registration was successful (correct session etc.) TICK
+			        	infoImage = new ImageIcon("images/Tick.png");
+					    imageLbl.setIcon(infoImage);
+					    tick = false;
+					  }
+					  
+					  if (x == 1){ //1 meaning correct module but incorrect session ALERT
+				        	infoImage = new ImageIcon("images/Alert.png");
+						    imageLbl.setIcon(infoImage);
+						    tick = false;
+					  }
+					  
+					  if (x == 2){ //2 meaning that registration was unsuccessful CROSS 
+				        	infoImage = new ImageIcon("images/Cross.png");
+						    imageLbl.setIcon(infoImage);
+						    tick = false;
+					  }
+				}
+				else {
+						  imageLbl.setIcon(null);
+				}
+			}
+		});
+		timer.setInitialDelay(0);
+		timer.start();
+		
 	}
 	
 	 private class actionListener implements ActionListener{
@@ -266,102 +266,20 @@ public class CardReaderClient extends JFrame {
 			}
 			if (src == submitBtn){		
 				input.setText("ID SUBMITTED!");
+				studentId = input.getText().trim();
 			}
 			if (src == settingsItem){
-				new settings();
+				new Settings(window);
+				if (Settings.returnBoolean() == true){
+					submitBtn.setEnabled(true);
+				}
 			}
 			if (src == settingsClearBtn){
-				ipAddressField.setText("");
-				ipAddress = "";
-				portNoField.setText("");
-				portNo = "";
-				roomIDField.setText("");
-				roomID = "";
-				broadcastIPField.setText("");
-				broadcastIP = "";
-				checkSettingInputs();
-			}
-			if (src == settingsSubmitBtn){
-				ipAddress = ipAddressField.getText();
-				portNo = portNoField.getText();
-				roomID = roomIDField.getText();
-				broadcastIP = broadcastIPField.getText();
-				checkSettingInputs();
-			}
-			if (src == testBtn){
-				updateImage(1);
+				
 			}
 		}
 	} 
 	
-	 public class settings extends JFrame {
-		 
-		 public settings(){
-			  
-			  setTitle("Settings");
-		      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		      
-		      
-		      
-		      settingsPanel = new JPanel();
-		      settingsPanel.setLayout(new GridLayout(5,2));
-		      
-		      
-		      ipAddressLbl = new JLabel("IP Address: ");
-		      ipAddressField = new JTextField(ipAddress);
-		      ipAddressField.setEditable(true);
-		      portLbl = new JLabel("Port Number: ");
-		      portNoField = new JTextField(portNo);
-		      portNoField.setEditable(true);
-		      roomIDLbl = new JLabel("Room ID: ");
-		      roomIDField = new JTextField(roomID);
-		      broadcastIPLbl = new JLabel("Broadcast IP: ");
-		      broadcastIPField = new JTextField(broadcastIP);
-		      roomIDField.setEditable(true);
-		      
-		      settingsSubmitBtn = new JButton("Submit");
-		      settingsClearBtn = new JButton("Clear");
-		      
-		      settingsSubmitBtn.addActionListener(new actionListener());
-		      settingsClearBtn.addActionListener(new actionListener());
-		      
-		      settingsPanel.add(ipAddressLbl);
-		      settingsPanel.add(ipAddressField);
-		      settingsPanel.add(portLbl);
-		      settingsPanel.add(portNoField);
-		      settingsPanel.add(roomIDLbl);
-		      settingsPanel.add(roomIDField);
-		      settingsPanel.add(broadcastIPLbl);
-		      settingsPanel.add(broadcastIPField);
-		      settingsPanel.add(settingsSubmitBtn);
-		      settingsPanel.add(settingsClearBtn);
-		      
-		      add(settingsPanel);
-		      
-		      setLocationRelativeTo(null);
-		      
-		      pack();
-		      
-		      setVisible(true);
-		      setResizable(false); 
-		      
-		      setLocationRelativeTo( null );
-		 }
-	 }
-	 
-	 public void checkSettingInputs(){
-		 
-	      if (ipAddress.equals("") || portNo.equals("") || roomID.equals("") || broadcastIP.equals("")){
-	    	  clearBtn.setEnabled(false);
-	    	  submitBtn.setEnabled(false);
-	      }
-	      else {
-	    	  clearBtn.setEnabled(true);
-	    	  submitBtn.setEnabled(true);
-	      }
-	 }
-	 
-	 
 		
 	public static void main(String[] args) {
 		CardReaderClient CardReader = new CardReaderClient();
