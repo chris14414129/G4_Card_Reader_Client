@@ -72,7 +72,7 @@ public class Session extends Thread {
 						{
 							System.out.println("if2");
 				//		CardReaderClient.sessionInfo(sesCode, sesName, startTime, endTime);
-							CardReaderClient.updateText(startTime,endTime, sesName, sesCode);
+							CardReaderGUI.updateText(startTime,endTime, sesName, sesCode);
 							
 						}
 						
