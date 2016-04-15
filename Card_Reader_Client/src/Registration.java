@@ -1,27 +1,19 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.ImageIcon;
-import javax.swing.Timer;
 
 public class Registration {
 	private String broadcastIP;
 	private int serverPort;
-//	private int clientPort;
+
 	private int roomID;
 	private boolean tick;
 
-	public Registration(String ip,int serverPort, int clientPort, int room)
+	public Registration(String ip,int serverPort,  int room)
 	{
 		this.broadcastIP=ip;
 		this.serverPort=serverPort;
-	//	this.clientPort=clientPort;
 		this.roomID= room;
 	}
 
@@ -31,11 +23,16 @@ public void register(String student_id)
 	
 		try
 		{
+			String r = Integer.toString(this.roomID);
+			String room = String.format("%3s", r).replace(" ", "0");
+		
 			//send UDP
 		  DatagramSocket sendSocket = new DatagramSocket ();
           byte[] buf = new byte[256];
-         String messg = this.roomID + "REG" + studID;
+         String messg = room + "REG" + studID;
      
+        System.out.println(messg);
+         
           buf = messg.getBytes ();
           InetAddress address = InetAddress.getByName (this.broadcastIP);
           DatagramPacket packet = new DatagramPacket (buf, buf.length, address, this.serverPort);

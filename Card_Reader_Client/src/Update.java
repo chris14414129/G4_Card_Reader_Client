@@ -45,7 +45,7 @@ class Update extends Thread
 			
 			if (Integer.parseInt(RoomID) == (this.roomID))
 			{
-				if(operation.equals("REG"))
+				if(operation.equals("CON"))
 				{
 					if(response.equals("PASS"))
 					{

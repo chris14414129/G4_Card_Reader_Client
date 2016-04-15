@@ -38,7 +38,7 @@ public class CardReaderClient {
 	public static void main(String[] args) {
 		
 		 new CardReaderGUI();
-		  Session ses = new  Session(Settings.broadcastIP, Integer.parseInt(Settings.clientPort), Integer.parseInt(Settings.roomID));
+		  Session ses = new  Session(Integer.parseInt(Settings.clientPort), Integer.parseInt(Settings.roomID));
 		 ses.start();
 			Update up = new	Update(Integer.parseInt(Settings.clientPort2), Integer.parseInt(Settings.roomID));
 			up.start();

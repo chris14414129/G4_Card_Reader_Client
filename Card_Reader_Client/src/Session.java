@@ -4,31 +4,22 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 public class Session extends Thread {
-	private String broadcastIP;
 	private int clientPort;
 	private int roomID;
 	
-	public Session(String ip,int port, int room)
+	public Session(int port, int room)
 	{
-		this.broadcastIP=ip;
 		this.clientPort=port;
 		this.roomID=room;
 	}
 
 	public void run()
 	{
-		System.out.println("test");
-		
-		
+
 		 DatagramSocket socket = null;
-		    DatagramPacket packet = null;
-			BufferedReader in=null;
-			String inputLine=null;
-			
-			
-			
-			
-			String operation = null;
+		 DatagramPacket packet = null;
+		 String operation = null;
+		 
 			while((!Thread.currentThread().isInterrupted()))
 			{	
 				try
@@ -43,7 +34,7 @@ public class Session extends Thread {
 			            String received = new String (packet.getData());
 			         //   System.out.println ("Received packet: " + received);
 					
-					System.out.println(received);
+	
 					
 					
 					String inRoomID = received.substring(0,3);
