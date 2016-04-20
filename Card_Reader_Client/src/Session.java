@@ -53,9 +53,13 @@ public class Session extends Thread {
 					
 					//public static void sessionInfo(String sesCode,String sesName,String start, String end)
 					
-					System.out.println("if");
+					String r = Integer.toString(this.roomID);
+					String room = String.format("%3s", r).replace(" ", "0");
 					
-					if (Integer.parseInt(inRoomID) == (this.roomID))
+					
+					System.out.println(Integer.parseInt(inRoomID));
+					
+					if (inRoomID.equals(room));
 					{
 						System.out.println("if1");
 						
@@ -68,7 +72,9 @@ public class Session extends Thread {
 						}
 						
 					}
-					//socket.close();
+					
+					socket.close();
+					
 				}
 				
 				catch (IOException e)
@@ -79,6 +85,7 @@ public class Session extends Thread {
 				//System.exit(0);
 
 			}
+			
 			
 	}
 }

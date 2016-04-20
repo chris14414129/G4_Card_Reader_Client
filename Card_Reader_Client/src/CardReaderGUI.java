@@ -140,19 +140,19 @@ public class CardReaderGUI {
 		
 	    startTimeLbl = new JLabel("Start Time");
 	    startTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
-	    startTimeDisplay = new JLabel("11:00");
+	    startTimeDisplay = new JLabel("NULL");
 	    startTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         endTimeLbl = new JLabel("End Time");
         endTimeLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        endTimeDisplay = new JLabel("13:00");
+        endTimeDisplay = new JLabel("NULL");
         endTimeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         sessionCodeLbl = new JLabel("Session Code");
         sessionCodeLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        sessionCodeDisplay = new JLabel("CSY2027");
+        sessionCodeDisplay = new JLabel("NULL");
         sessionCodeDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         sessionNameLbl = new JLabel("Session Name");
         sessionNameLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        sessionNameDisplay = new JLabel("Group Project");
+        sessionNameDisplay = new JLabel("NULL");
         sessionNameDisplay.setHorizontalAlignment(SwingConstants.CENTER);
         
 	      

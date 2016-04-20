@@ -24,7 +24,7 @@ public class Settings {
 	private JButton submitBtn;
 	private static JButton clearBtn;
 	
-	public static String clientPort = "4456", serverPort = "4455", roomID = "001", broadcastIP = "127.0.0.1", clientPort2 = "4454";
+	public static String clientPort = "4456", serverPort = "4455", roomID = "001", broadcastIP = "192.168.168.2", clientPort2 = "4454";
 	
 	public Settings(JFrame parentFrame) {
 		settings = new JDialog(parentFrame, true);
