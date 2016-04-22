@@ -20,8 +20,16 @@ public class Session extends Thread {
 		 DatagramPacket packet = null;
 		 String operation = null;
 		 
+		 
+		 
 			while((!Thread.currentThread().isInterrupted()))
 			{	
+				//CardReaderGUI.updateImage(0);
+				
+				//	CardReaderGUI.updateImage(2);
+				
+				//	CardReaderGUI.updateImage(1);
+				
 				try
 				{
 					System.out.println("test");
@@ -72,6 +80,15 @@ public class Session extends Thread {
 						}
 						
 					}
+					
+					
+						CardReaderGUI.updateImage(0);
+					
+					//	CardReaderGUI.updateImage(2);
+					
+					//	CardReaderGUI.updateImage(1);
+					
+					
 					
 					socket.close();
 					
